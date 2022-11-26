@@ -5,33 +5,27 @@ const Categorys = () => {
 
     const categorys = [
         {
-            "id": 1,
-            "name": "Oppo F21 Pro 5G",
-            "price": 15000,
-            "buy": 28000,
-            "img": "https://www.oppo.com/content/dam/oppo/product-asset-library/f/f21-pro-5g/v1/assets/images-design-lights1_mo-1.jpg.webp",
+            "_id": 1,
+            "category": "oppo",
+            "img": "https://w0.peakpx.com/wallpaper/1/222/HD-wallpaper-oppo-violet-logo-violet-brickwall-oppo-logo-brands-oppo-neon-logo-oppo-thumbnail.jpg",
         },
         {
-            "id": 2,
-            "name": "iPhone 14 Pro Max",
-            "price": 90000,
-            "buy": 160000,
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzqhog3tdRHMqjLcH0dFkKT-FX5XMfkYQBeA&usqp=CAU",
+            "_id": 2,
+            "category": "apple",
+            "img": "https://media.gettyimages.com/id/1241013534/photo/apple-logo-at-an-apple-store-on-may-31-2022-in-berlin-germany.jpg?s=612x612&w=gi&k=20&c=Dj6QboW0pHPRPLkwRfiAxV2O_tT9ECBQ5k2CJpHFxTQ=",
         },
         {
-            "id": 3,
-            "name": "Xiaomi Redmi Note 12 Pro",
-            "price": 26000,
-            "buy": 45000,
-            "img": "https://tbazzar.com/wp-content/uploads/2021/11/xiaomi-redmi-note-12-pro-discovery-explorer-1.jpg",
-        }
+            "_id": 3,
+            "category": "mi",
+            "img": "https://www.xiaomidna.com/wp-content/uploads/2021/04/facts-about-xiaomi.jpg",
+        } 
     ]
 
     return (
         <div className='grid gap-4 justify-center md:grid-cols-2 lg:grid-cols-3 mt-32'>
             {
                 categorys.map(category => <Product
-                    key={category.id}
+                    key={category._id}
                     product={category}
                 ></Product>)
             }

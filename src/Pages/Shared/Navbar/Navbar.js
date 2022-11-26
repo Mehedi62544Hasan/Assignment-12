@@ -40,17 +40,17 @@ const Navbar = () => {
                             title="Our product"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                            Product
+                            Home
                         </Link>
                     </li>
                     <li>
                         <Link
-                            to="/"
+                            to="/products"
                             aria-label="Our product"
                             title="Our product"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                            Features
+                            Products
                         </Link>
                     </li>
                     <li>
