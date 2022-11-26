@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashbordLayout from "../Layout/DashbordLayout/DashbordLayout";
 import Main from "../Layout/Main/Main";
 import AddProduct from "../Pages/AddProduct/AddProduct";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products/Products";
@@ -16,7 +18,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/products/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/products?category=${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/products?category=${params.id}`),
                 element: <Products></Products>
             },
             {
@@ -27,6 +29,16 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashbordLayout></DashbordLayout>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+        }
         ]
     }
 ]);

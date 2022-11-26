@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
+import { BsStarFill } from "react-icons/bs";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,7 +56,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link
-                            to="/"
+                            to="/dashboard"
                             aria-label="Product pricing"
                             title="Product pricing"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -88,7 +89,9 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <div className="lg:hidden">
-                    <button
+                   <div className='flex'>
+                   <label htmlFor="my-drawer-2" className="btn btn-sm lg:hidden">Open</label>
+                   <button
                         aria-label="Open Menu"
                         title="Open Menu"
                         className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
@@ -109,6 +112,7 @@ const Navbar = () => {
                             />
                         </svg>
                     </button>
+                   </div>
                     {isMenuOpen && (
                         <div className="absolute top-0 left-0 w-full">
                             <div className="p-5 bg-white border rounded shadow-sm">
@@ -180,7 +184,7 @@ const Navbar = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="/"
+                                                to="/dashboard"
                                                 aria-label="Product pricing"
                                                 title="Product pricing"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
