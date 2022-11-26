@@ -38,14 +38,11 @@ const ProductDetails = ({ product, setBuyPhone }) => {
                         <div>
                             <p className="text-sm"> <strike>{buy}</strike> (New price)</p>
                         </div>
-                        {/* <button
-                            htmlFor="booking-modal"
+                        <label
                             onClick={() => setBuyPhone(product)}
+                            htmlFor="booking-modal"
                             className="btn btn-outline btn-sm btn-secondary mb-3 mr-4"
-                        >Book now</button> */}
-                      
-                      <label htmlFor="my-modal-3" className="btn">open modal</label>
-
+                        >Book now</label>
                     </div>
                 </div>
             </div>

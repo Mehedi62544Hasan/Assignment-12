@@ -2,8 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-// import useTitle from '../../../../../assignment-11/online-seller-client/src/Hooks/useTitle';
-
+ 
 const Login = () => {
 
     const [error, setError] = useState('');
