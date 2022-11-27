@@ -7,18 +7,18 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     const [error, setError] = useState('');
-    const [toggle, setToggle] = useState(false);
+    // const [toggle, setToggle] = useState(false);
 
     // useTitle('SignUp');
 
     const { createAccount, loginGoogle, updateUserProfile } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
-    const userRole = (event) => {
-        const role = event.target.value;
-        console.log(role)
-        return role;
-    }
+    // const userRole = (event) => {
+    //     const role = event.target.value;
+    //     console.log(role)
+    //     return role;
+    // }
 
     const handleCreatAccount = (event) => {
         event.preventDefault();
@@ -28,13 +28,14 @@ const SignUp = () => {
         const name = from.name.value;
         const photoURL = from.image.value
         const email = from.email.value;
-        const password = from.password.value;
- 
-        createAccount(email, password)
+        const password = from.password.value; 
+
+        createAccount(email, password) 
             .then(result => {
                 from.reset();
                 setError('');
-                handleupdateProfile(name, photoURL);
+                handleupdateProfile(name, photoURL)
+                saveUser( name, email );  
                 Swal.fire(
                     'Good job!',
                     'Your Registretion Successfull!',
@@ -61,7 +62,9 @@ const SignUp = () => {
 
         }
         updateUserProfile(profile)
-            .then(() => { })
+            .then(() => { 
+
+            })
             .catch(err => console.error(err))
     }
 
@@ -96,20 +99,35 @@ const SignUp = () => {
         )
     }
 
-    const handleToggle = () => {
-        setToggle(!toggle)
-    }
+    // const handleToggle = () => {
+    //     setToggle(!toggle)
+    // }
+
+    const saveUser = (name, email ) => {
+         const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // setCreatedUserEmail(email);
+            })
+    } 
 
     return (
         <div className='flex justify-center mt-10'>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
                 <h1 className="text-2xl font-bold text-center">Sign up</h1>
-                <p onClick={handleToggle}>
+                {/* <p onClick={handleToggle}>
                     {
                         toggle ? <button onClick={userRole} className='btn btn-secondary btn-sm'>Seller</button>
                             : <button onClick={userRole} className='btn btn-secondary btn-sm'>Buyer</button>
                     }
-                </p>
+                </p> */}
                 <form onSubmit={handleCreatAccount} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label htmlFor="username" className="block dark:text-gray-400">UserName</label>
@@ -126,7 +144,7 @@ const SignUp = () => {
                     <div className="space-y-1 text-sm">
                         <label htmlFor="password" className="block dark:text-gray-400">Password</label>
                         <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
-                    </div>   
+                    </div>
                     <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
