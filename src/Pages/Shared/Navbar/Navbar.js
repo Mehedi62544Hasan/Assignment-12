@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
 import logo from '../../../assets/mp icon.jpg'
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const {user} = useContext(AuthContext);
+    console.log(user)
+
     return (
         <div className="navbarrr px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
             <div className="relative flex items-center justify-between">
                 <Link
                     to="/"
                     aria-label="Company"
-                    title="Company"
+                    title="Mobile Point"
                     className="inline-flex items-center"
                 >
                     <img src={logo} alt="" className='w-12 rounded-full' />
@@ -23,7 +27,7 @@ const Navbar = () => {
                         <Link
                             to="/"
                             aria-label="Our product"
-                            title="Our product"
+                            title="Home"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                             Home
@@ -33,17 +37,17 @@ const Navbar = () => {
                         <Link
                             to="/products"
                             aria-label="Our product"
-                            title="Our product"
+                            title="Advertised"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                            Products
+                            Advertised
                         </Link>
                     </li>
                     <li>
                         <Link
                             to="/dashboard"
                             aria-label="Product pricing"
-                            title="Product pricing"
+                            title="Dashboard"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
 
@@ -54,7 +58,7 @@ const Navbar = () => {
                         <Link
                             to="/addProduct"
                             aria-label="About us"
-                            title="About us"
+                            title="Add Product"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                             Add Product
@@ -63,14 +67,29 @@ const Navbar = () => {
                 </ul>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
                     <li>
-                        <Link
-                            to="/"
-                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                            aria-label="Sign up"
-                            title="Sign up"
-                        >
-                            Sign up
-                        </Link>
+                        {
+                            user?.uid ?
+                                <>
+                                    <Link
+                                        to="/"
+                                        className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                        aria-label="LogOut"
+                                        title="LogOut"
+                                    >
+                                        LogOut
+                                    </Link>
+                                </>
+                                : <>
+                                    <Link
+                                        to="/login"
+                                        className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                        aria-label="Login"
+                                        title="Login"
+                                    >
+                                        Login
+                                    </Link>
+                                </>
+                        }
                     </li>
                 </ul>
                 <div className="lg:hidden">
@@ -106,7 +125,7 @@ const Navbar = () => {
                                         <Link
                                             to="/"
                                             aria-label="Company"
-                                            title="Company"
+                                            title="Mobile Point"
                                             className="inline-flex items-center"
                                         >
                                             <svg
@@ -151,27 +170,27 @@ const Navbar = () => {
                                             <Link
                                                 to="/"
                                                 aria-label="Our product"
-                                                title="Our product"
+                                                title="Home"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
-                                                Product
+                                                Home
                                             </Link>
                                         </li>
                                         <li>
                                             <Link
                                                 to="/"
                                                 aria-label="Our product"
-                                                title="Our product"
+                                                title="Advertised"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
-                                                Features
+                                                Advertised
                                             </Link>
                                         </li>
                                         <li>
                                             <Link
                                                 to="/dashboard"
                                                 aria-label="Product pricing"
-                                                title="Product pricing"
+                                                title="Dashboard"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
                                                 Dashboard
@@ -181,21 +200,36 @@ const Navbar = () => {
                                             <Link
                                                 to="/"
                                                 aria-label="About us"
-                                                title="About us"
+                                                title="Blogs"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
-                                                About us
+                                                Blogs
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link
-                                                to="/"
-                                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                                aria-label="Sign up"
-                                                title="Sign up"
-                                            >
-                                                Sign in
-                                            </Link>
+                                            {
+                                                user?.uid ?
+                                                    <>
+                                                        <Link
+                                                            to="/"
+                                                             className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                                            aria-label="LogOut"
+                                                            title="LogOut"
+                                                        >
+                                                            LogOut
+                                                        </Link>
+                                                    </>
+                                                    : <>
+                                                        <Link
+                                                            to="/login"
+                                                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                                            aria-label="Login"
+                                                            title="Login"
+                                                        >
+                                                            Login
+                                                        </Link>
+                                                    </>
+                                            }
                                         </li>
                                     </ul>
                                 </nav>
