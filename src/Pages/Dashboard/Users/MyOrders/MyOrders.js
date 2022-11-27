@@ -1,6 +1,26 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 
 const MyOrders = () => {
+
+    const { user } = useContext(AuthContext);
+
+    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+
+    const { data: bookings = [] } = useQuery({
+        queryKey: ['bookings', user?.email],
+        queryFn: async () => {
+            const res = await fetch(url, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            const data = await res.json();
+            return data;
+        }
+    }) 
+
     return (
        <div>
         <p className="text-xl font-bold text-center my-6">My Orders</p>
@@ -9,30 +29,20 @@ const MyOrders = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
-                    </tr>
+                        <th>Photo</th>
+                        <th>Phone Model</th>
+                        <th>Price</th>
+                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Blue</td>
-                    </tr>
-                    <tr className="hover">
-                        <th>2</th>
-                        <td>Hart Hagerty</td>
-                        <td>Desktop Support Technician</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td>Brice Swyre</td>
-                        <td>Tax Accountant</td>
-                        <td>Red</td>
-                    </tr>
+                   {
+                    bookings.map( (booking, i) =>  <tr>
+                        <th>{i + 1}</th>
+                        <td><img src={booking.img} alt="" className='w-12 h-12 rounded-2xl' /></td>
+                        <td>{booking.item}</td>
+                        <td>{booking.price}</td>
+                     </tr> )
+                   } 
                 </tbody>
             </table>
         </div>

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 const BookingModal = ({ buyPhone, setBuyPhone }) => {
 
-     const { name, price } = buyPhone;
+     const { img, name, price } = buyPhone;
      const { user } = useContext(AuthContext); 
 
     const handleBooking = event => {
@@ -20,6 +20,7 @@ const BookingModal = ({ buyPhone, setBuyPhone }) => {
          const phone = form.phone.value;
 
          const booking = {
+            img,
              buyer,
              email,
             item,
