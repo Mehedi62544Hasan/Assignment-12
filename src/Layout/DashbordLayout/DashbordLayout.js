@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useAdmin from '../../Hooks/useAdmin/useAdmin';
 import Footer from '../../Pages/Shared/Footer/Footer';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
 
 const DashbordLayout = () => {
+    const {user} = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
+
+ 
     return (
         <div>
             <Navbar></Navbar>
@@ -16,7 +22,7 @@ const DashbordLayout = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 text-base-content">
                     <li><Link to="/dashboard">My orders</Link></li>
-                    <li><Link to="/dashboard/allseller">All Seller</Link></li>
+                    {/* <li><Link to="/dashboard/allseller">All Seller</Link></li> */}
                         {
                             // isBuyer && <li><Link to="/dashboard">My orders</Link></li>
                         },
@@ -27,12 +33,12 @@ const DashbordLayout = () => {
                                 <li><Link to="/dashboard/managedoctors">My buyers</Link></li>
                             </>
                         }, */}
-                        {/* {
-                            isAdmin && <>
-                                <li><Link to="/dashboard/allusers"> All Sellers</Link></li>
-                                <li><Link to="/dashboard/adddoctor">All Buyers</Link></li>
+                        {
+                            isAdmin &&  <>
+                                <li><Link to="/dashboard/allseller"> All Sellers</Link></li>
+                                 {/* <li><Link to="/dashboard/adddoctor">All Buyers</Link></li> */}
                             </>
-                        } */}
+                        }
                     </ul>
                 </div>
             </div>

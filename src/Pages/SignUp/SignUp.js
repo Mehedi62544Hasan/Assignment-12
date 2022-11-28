@@ -54,8 +54,7 @@ const SignUp = () => {
     const handleupdateProfile = (name, photoURL) => {
         const profile = {
             displayName: name,
-            photoURL: photoURL
-
+            photoURL: photoURL 
         }
         updateUserProfile(profile)
             .then(() => {
