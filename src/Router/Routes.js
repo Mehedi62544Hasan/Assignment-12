@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import DashbordLayout from "../Layout/DashbordLayout/DashbordLayout";
 import Main from "../Layout/Main/Main";
+import Blogs from "../Pages/Blogs/Blogs";
 import AllBuyer from "../Pages/Dashboard/Admin/AllBuyers/AllBuyers";
 import AllSeller from "../Pages/Dashboard/Admin/AllSellers/AllSellers";
  import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
@@ -11,12 +13,14 @@ import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products/Products";
 import SignUp from "../Pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -24,9 +28,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/products/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/products?category=${params.id}`),
+                loader: ({ params }) => fetch(`https://resale-mobile-point-server.vercel.app/products?category=${params.id}`),
                 element: <Products></Products>
             }, 
+            {
+                path: '/blogs',
+                element: <Blogs></Blogs>
+            },
             {
                 path: '/login',
                 element: <Login></Login>
@@ -39,7 +47,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashbordLayout></DashbordLayout>,
+        element: <PrivateRoute><DashbordLayout></DashbordLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard',

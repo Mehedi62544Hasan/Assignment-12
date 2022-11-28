@@ -2,7 +2,7 @@ import React from 'react';
  
 const Banner = () => {
     return (
-      <div className="carousel max-w-screen-xl h-screen mt-24">
+      <div className="carousel max-w-screen-xl h-screen mt-52 lg:mt-24">
       <div id="slide1" className="carousel-item relative w-full">
         <img src="https://mobyshop.com.sg/media/wysiwyg/home/rog6-batman-block.png" className="w-full" />
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

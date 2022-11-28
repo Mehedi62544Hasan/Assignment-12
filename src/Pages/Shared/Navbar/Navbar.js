@@ -68,12 +68,12 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link
-                            to="/addProduct"
+                            to="/blogs"
                             aria-label="About us"
                             title="Add Product"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                            Add Product
+                            Blogs
                         </Link>
                     </li>
                 </ul>
@@ -211,7 +211,7 @@ const Navbar = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="/"
+                                                to="/Blogs"
                                                 aria-label="About us"
                                                 title="Blogs"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"

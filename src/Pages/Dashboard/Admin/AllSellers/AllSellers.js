@@ -6,7 +6,7 @@ const AllSeller = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('https://resale-mobile-point-server.vercel.app/users');
             const data = await res.json();
             return data;
         }
@@ -15,7 +15,7 @@ const AllSeller = () => {
     const sellers = users.filter(user => user.role === 'seller')
 
     const handleVerifySeller = id => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://resale-mobile-point-server.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -37,7 +37,7 @@ const AllSeller = () => {
     const handleDeleteSeller = id => {
         const proceed = window.confirm('are you want to delete products');
     if (proceed) {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://resale-mobile-point-server.vercel.app/users/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

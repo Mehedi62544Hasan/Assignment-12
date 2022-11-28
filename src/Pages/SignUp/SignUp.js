@@ -111,7 +111,7 @@ const SignUp = () => {
             email,
             role: userRol,
         };
-        fetch('http://localhost:5000/users', {
+        fetch('https://resale-mobile-point-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
