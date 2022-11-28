@@ -34,6 +34,26 @@ const AllSeller = () => {
             })
     }
 
+    const handleDeleteBuyer = id => {
+        const proceed = window.confirm('are you want to delete products');
+    if (proceed) {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    Swal.fire(
+                        'Good job!',
+                        'Delete Successfull!',
+                        'success'
+                    )
+                    refetch();
+                }
+            })
+    }
+}
+
     return (
         <div> 
             <p className="text-xl font-bold text-center my-6">All Users</p>
@@ -58,7 +78,7 @@ const AllSeller = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.verify !== 'true' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Verify</button>}</td>
-                                <td><button className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td><button onClick={() => handleDeleteBuyer(user?._id)} className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         } 
                     </tbody>
