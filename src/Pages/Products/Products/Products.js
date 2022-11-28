@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../BookingModal/BookingModal';
-
+ 
 const Products = () => {
     const [buyPhone, setBuyPhone] = useState({})
     const products = useLoaderData();
+
 
     return (
         <div>
@@ -14,7 +15,7 @@ const Products = () => {
                     products.map(product => <ProductDetails
                         key={product._id}
                         product={product}
-                        setBuyPhone={setBuyPhone}
+                         setBuyPhone={setBuyPhone}
                     ></ProductDetails>)
                 }
             </div>

@@ -1,13 +1,28 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { HiShieldCheck } from "react-icons/hi";
+import { CiNoWaitingSign } from "react-icons/ci";
 
-const ProductDetails = ({ product, setBuyPhone }) => {
-    const { img, name, seller, location, used, time, price, buy, condition, phone, description } = product;
+const ProductDetails = ({ product, setBuyPhone  }) => {
+    const { email, img, name, seller, location, used, time, price, buy, condition, phone, description } = product; 
+    
+    const { data: users = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch('https://resale-mobile-point-server.vercel.app/users');
+            const data = await res.json();
+            return data;
+        }
+    });
+
+    const verify =  users.find(usr => usr.email === email);  
 
     return (
         <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-900 dark:text-gray-100">
             <div className="flex items-center justify-between p-3">
                 <div className="flex items-center space-x-2">
                     <div className="flex justify-between">
+                        {verify?.verify ? <HiShieldCheck className='text-green-600 mr-3 text-xl' /> : <CiNoWaitingSign className='text-red-600 mr-3 text-xl' /> }
                         <h2 className="font-semibold leading-none">{seller}</h2>
                     </div>
                 </div>
@@ -31,7 +46,8 @@ const ProductDetails = ({ product, setBuyPhone }) => {
                 <span className="text-base font-semibold">{name}</span>
                 <p className="text-sm my-4">{description}</p>
                 <p className="text-sm">Used: {used}</p>
-                <p className="text-sm">Condition: {condition}</p>
+                <p className="text-sm">Condition: {condition}</p> 
+
                 <p className='text-red-500 text-xl font-bold ml-3 mt-3'>$ {price}</p>
                 <div>
                     <div className='flex justify-between'>
