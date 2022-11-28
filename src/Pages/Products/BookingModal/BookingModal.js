@@ -42,7 +42,7 @@ const BookingModal = ({ buyPhone, setBuyPhone }) => {
                     setBuyPhone(null);
                     Swal.fire(
                         'Good job!',
-                        'Your Login Successfull!',
+                        'Booking Successfull!',
                         'success'
                     )
                  }

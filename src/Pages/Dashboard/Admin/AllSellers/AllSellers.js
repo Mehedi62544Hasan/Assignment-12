@@ -14,7 +14,7 @@ const AllSeller = () => {
 
     const sellers = users.filter(user => user.role === 'seller')
 
-    const handleMakeAdmin = id => {
+    const handleVerifySeller = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT',
             headers: {
@@ -26,7 +26,7 @@ const AllSeller = () => {
                 if (data.modifiedCount > 0) {
                     Swal.fire(
                         'Good job!',
-                        'Your Registretion Successfull!',
+                        ' Successfull!',
                         'success'
                     )
                     refetch();
@@ -34,7 +34,7 @@ const AllSeller = () => {
             })
     }
 
-    const handleDeleteBuyer = id => {
+    const handleDeleteSeller = id => {
         const proceed = window.confirm('are you want to delete products');
     if (proceed) {
         fetch(`http://localhost:5000/users/${id}`, {
@@ -45,7 +45,7 @@ const AllSeller = () => {
                 if (data.deletedCount > 0) {
                     Swal.fire(
                         'Good job!',
-                        'Delete Successfull!',
+                        'Seller Delete Successfull!',
                         'success'
                     )
                     refetch();
@@ -77,8 +77,8 @@ const AllSeller = () => {
                                 <td><img src={user.img} alt="" className='w-10 h-10 rounded-full' /></td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user?.verify !== 'true' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Verify</button>}</td>
-                                <td><button onClick={() => handleDeleteBuyer(user?._id)} className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td>{user?.verify !== 'true' && <button onClick={() => handleVerifySeller(user._id)} className='btn btn-xs btn-primary'>Verify</button>}</td>
+                                <td><button onClick={() => handleDeleteSeller(user?._id)} className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         } 
                     </tbody>
