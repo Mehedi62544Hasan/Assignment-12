@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Footer from '../../Pages/Shared/Footer/Footer';
 import Navbar from '../../Pages/Shared/Navbar/Navbar';
 
@@ -9,16 +9,31 @@ const DashbordLayout = () => {
             <Navbar></Navbar>
             <div className="navbarrr drawer drawer-mobile mt-16">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content"> 
+                <div className="drawer-content">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 md:bg-base-100 text-base-content">
-                        <li><a>Sidebar Item 1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
+                    <ul className="menu p-4 w-80 text-base-content">
+                    <li><Link to="/dashboard">My orders</Link></li>
+                    <li><Link to="/dashboard/allseller">All Seller</Link></li>
+                        {
+                            // isBuyer && <li><Link to="/dashboard">My orders</Link></li>
+                        },
+                        {/* {
+                            isSeller && <>
+                                <li><Link to="/dashboard/allusers">My Products</Link></li>
+                                <li><Link to="/dashboard/adddoctor">Add A product </Link></li>
+                                <li><Link to="/dashboard/managedoctors">My buyers</Link></li>
+                            </>
+                        }, */}
+                        {/* {
+                            isAdmin && <>
+                                <li><Link to="/dashboard/allusers"> All Sellers</Link></li>
+                                <li><Link to="/dashboard/adddoctor">All Buyers</Link></li>
+                            </>
+                        } */}
                     </ul>
-
                 </div>
             </div>
             <Footer></Footer>

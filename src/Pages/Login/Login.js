@@ -49,8 +49,7 @@ const Login = () => {
     const googleLogin = () => {
         loginGoogle()
             .then(result => {
-                const user = result.user;
-                console.log(user)
+                const user = result.user; 
                 Swal.fire(
                     'Good job!',
                     'Your Login Successfull!',
@@ -91,7 +90,7 @@ const Login = () => {
                         <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <p>{error}</p>
-                    <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+                    <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Login</button>
 
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
@@ -117,7 +116,7 @@ const Login = () => {
                     </button>
                 </div>
                 <p className="text-xs text-center sm:px-6 dark:text-white">Don't have an account?
-                    <Link rel="noopener noreferrer" to="/signup" className="underline dark:text-gray-100">Sign up</Link>
+                    <Link rel="noopener noreferrer" to="/signup" className="underline text-xl ml-2 font-semibold dark:text-amber-500">Sign up</Link>
                 </p>
             </div>
         </div>

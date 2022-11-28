@@ -1,11 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
+import Swal from 'sweetalert2'; 
 import logo from '../../../assets/mp icon.jpg'
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {user} = useContext(AuthContext);
+    const {user, logOut} = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+          .then(() => {
+            Swal.fire(
+              'Good job!',
+              'Your Logout Successfull!',
+              'success'
+            )
+          })
+          .catch(error => console.error(error))
+      }
  
     return (
         <div className="navbarrr px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -71,6 +84,7 @@ const Navbar = () => {
                                 <>
                                     <Link
                                         to="/"
+                                        onClick={handleLogOut} 
                                         className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                         aria-label="LogOut"
                                         title="LogOut"
@@ -211,6 +225,7 @@ const Navbar = () => {
                                                     <>
                                                         <Link
                                                             to="/"
+                                                            onClick={handleLogOut} 
                                                              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide bg-blue-600 text-white transition duration-200 rounded shadow-md bg-blue-600 hover:bg-gray-300 py-2 px-3 rounded-lg  hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                                             aria-label="LogOut"
                                                             title="LogOut"

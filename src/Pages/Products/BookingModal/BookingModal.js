@@ -37,8 +37,7 @@ const BookingModal = ({ buyPhone, setBuyPhone }) => {
             body: JSON.stringify(booking)
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then(data => { 
                 if (data.acknowledged) {
                     setBuyPhone(null);
                     Swal.fire(

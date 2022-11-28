@@ -7,18 +7,15 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     const [error, setError] = useState('');
-    // const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(false);
+    const [userRol, setUserRol] = useState('buyer')
+
 
     // useTitle('SignUp');
 
     const { createAccount, loginGoogle, updateUserProfile } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
-    // const userRole = (event) => {
-    //     const role = event.target.value;
-    //     console.log(role)
-    //     return role;
-    // }
 
     const handleCreatAccount = (event) => {
         event.preventDefault();
@@ -28,14 +25,13 @@ const SignUp = () => {
         const name = from.name.value;
         const photoURL = from.image.value
         const email = from.email.value;
-        const password = from.password.value; 
-
-        createAccount(email, password) 
+        const password = from.password.value;
+        createAccount(email, password)
             .then(result => {
                 from.reset();
                 setError('');
                 handleupdateProfile(name, photoURL)
-                saveUser( name, email );  
+                saveUser(name, email, photoURL, userRol);
                 Swal.fire(
                     'Good job!',
                     'Your Registretion Successfull!',
@@ -62,7 +58,7 @@ const SignUp = () => {
 
         }
         updateUserProfile(profile)
-            .then(() => { 
+            .then(() => {
 
             })
             .catch(err => console.error(err))
@@ -71,8 +67,7 @@ const SignUp = () => {
     const googleLogin = () => {
         loginGoogle(googleProvider)
             .then(result => {
-                const user = result;
-                console.log(user)
+                const user = result; 
                 Swal.fire(
                     'Good job!',
                     'Your Registretion Successfull!',
@@ -99,12 +94,19 @@ const SignUp = () => {
         )
     }
 
-    // const handleToggle = () => {
-    //     setToggle(!toggle)
-    // }
+    const handleToggle = (event) => {
+        setToggle(!toggle)
+        const role = event.target.value;
+        setUserRol(role)
+    }
 
-    const saveUser = (name, email ) => {
-         const user = { name, email };
+    const saveUser = (name, email, photoURL, userRol) => {
+        const user = {
+            img: photoURL,
+            name,
+            email,
+            role: userRol,
+        };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -116,40 +118,40 @@ const SignUp = () => {
             .then(data => {
                 // setCreatedUserEmail(email);
             })
-    } 
+    }
 
     return (
         <div className='flex justify-center mt-10'>
-            <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
+            <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-blue-400 dark:text-gray-100">
                 <h1 className="text-2xl font-bold text-center">Sign up</h1>
-                {/* <p onClick={handleToggle}>
+                <p onClick={handleToggle}>
                     {
-                        toggle ? <button onClick={userRole} className='btn btn-secondary btn-sm'>Seller</button>
-                            : <button onClick={userRole} className='btn btn-secondary btn-sm'>Buyer</button>
+                        toggle ? <button value="buyer" className='btn btn-warning btn-sm'>Seller</button>
+                            : <button value="seller" className='btn btn-secondary btn-sm'>Buyer</button>
                     }
-                </p> */}
+                </p>
                 <form onSubmit={handleCreatAccount} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="username" className="block dark:text-gray-400">UserName</label>
+                        <label htmlFor="username" className="block dark:text-white">UserName</label>
                         <input type="text" name="name" id="username" placeholder="UserName" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="username" className="block dark:text-gray-400">Image URL</label>
+                        <label htmlFor="username" className="block dark:text-white">Image URL</label>
                         <input type="text" name="image" id="image" placeholder="Image URL" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="username" className="block dark:text-gray-400">Email</label>
+                        <label htmlFor="username" className="block dark:text-white">Email</label>
                         <input type="email" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="password" className="block dark:text-gray-400">Password</label>
+                        <label htmlFor="password" className="block dark:text-white">Password</label>
                         <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
                     </div>
-                    <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+                    <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign up</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-                    <p className="px-3 text-sm dark:text-gray-400">Register with social accounts</p>
+                    <p className="px-3 text-sm dark:text-white">Register with social accounts</p>
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
                 </div>
                 <div className="flex justify-center space-x-4">
@@ -169,8 +171,8 @@ const SignUp = () => {
                         </svg>
                     </button>
                 </div>
-                <p className="text-xs text-center sm:px-6 dark:text-gray-400">You have an account?
-                    <Link rel="noopener noreferrer" to="/login" className="underline dark:text-gray-100">Log in</Link>
+                <p className="text-xs text-center sm:px-6 dark:text-white">You have an account?
+                    <Link rel="noopener noreferrer" to="/login" className="underline text-xl ml-2 font-semibold dark:text-amber-500">Login</Link>
                 </p>
             </div>
         </div>
