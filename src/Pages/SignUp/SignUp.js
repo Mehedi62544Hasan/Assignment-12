@@ -1,7 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import Swal from 'sweetalert2'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 // import useTitle from '../../Hooks/useTitle';
 
@@ -9,9 +9,14 @@ const SignUp = () => {
     const [error, setError] = useState('');
     const [toggle, setToggle] = useState(false);
     const [userRol, setUserRol] = useState('buyer')
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
 
 
     // useTitle('SignUp');
+    const fromm = location.state?.from?.pathname || "/";  
 
     const { createAccount, loginGoogle, updateUserProfile } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
@@ -27,7 +32,7 @@ const SignUp = () => {
         const email = from.email.value;
         const password = from.password.value;
         createAccount(email, password)
-            .then(result => {
+            .then(result => { 
                 from.reset();
                 setError('');
                 handleupdateProfile(name, photoURL)
@@ -58,7 +63,7 @@ const SignUp = () => {
         }
         updateUserProfile(profile)
             .then(() => {
-
+                navigate(fromm, { replace: true }) 
             })
             .catch(err => console.error(err))
     }

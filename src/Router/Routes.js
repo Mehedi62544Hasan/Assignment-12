@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashbordLayout from "../Layout/DashbordLayout/DashbordLayout";
 import Main from "../Layout/Main/Main";
-import AddProduct from "../Pages/AddProduct/AddProduct";
-import AllBuyer from "../Pages/Dashboard/AllBuyer/AllBuyer";
-import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
- import MyOrders from "../Pages/Dashboard/Users/MyOrders/MyOrders";
+import AllBuyer from "../Pages/Dashboard/Admin/AllBuyers/AllBuyers";
+import AllSeller from "../Pages/Dashboard/Admin/AllSellers/AllSellers";
+ import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
+import MyProducts from "../Pages/Dashboard/Seller/MyProducts/MyProducts";
+import MyOrders from "../Pages/Dashboard/Users/MyOrders/MyOrders";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Products from "../Pages/Products/Products/Products";
@@ -23,11 +24,7 @@ const router = createBrowserRouter([
                 path: '/products/:id',
                 loader: ({ params }) => fetch(`http://localhost:5000/products?category=${params.id}`),
                 element: <Products></Products>
-            },
-            {
-                path: '/addProduct',
-                element: <AddProduct></AddProduct>
-            },
+            }, 
             {
                 path: '/login',
                 element: <Login></Login>
@@ -35,7 +32,7 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
-            }
+            } 
         ]
     },
     {
@@ -45,15 +42,23 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <MyOrders></MyOrders>
-        },
-        {
-            path: '/dashboard/allseller',
-            element: <AllSeller></AllSeller>
-        },
-        {
-            path: '/dashboard/allbuyer',
-            element: <AllBuyer></AllBuyer>
-        }
+            },
+            {
+                path: '/dashboard/addProduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/allseller',
+                element: <AllSeller></AllSeller>
+            },
+            {
+                path: '/dashboard/allbuyer',
+                element: <AllBuyer></AllBuyer>
+            }
         ]
     }
 ]);

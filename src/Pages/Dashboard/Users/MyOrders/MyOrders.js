@@ -1,25 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
+import Loading from '../../../Shared/Loader/Loading';
 
 const MyOrders = () => {
 
-    const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext); 
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
-
-    const { data: bookings = [] } = useQuery({
+    const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(url, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
-            });
+            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
-    }) 
+    });
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
        <div>
@@ -36,7 +35,9 @@ const MyOrders = () => {
                 </thead>
                 <tbody>
                    {
-                    bookings.map( (booking, i) =>  <tr>
+                    bookings.map( (booking, i) =>  <tr
+                    key={i}
+                    >
                         <th>{i + 1}</th>
                         <td><img src={booking.img} alt="" className='w-12 h-12 rounded-2xl' /></td>
                         <td>{booking.item}</td>
