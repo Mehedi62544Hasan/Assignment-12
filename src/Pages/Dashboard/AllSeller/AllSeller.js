@@ -12,6 +12,8 @@ const AllSeller = () => {
         }
     });
 
+    const sellers = users.filter(user => user.role === 'seller')
+
     const handleMakeAdmin = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT',
@@ -50,7 +52,7 @@ const AllSeller = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, i) => <tr key={user._id}>
+                            sellers.map((user, i) => <tr key={user._id}>
                                 <th>{i + 1}</th>
                                 <td><img src={user.img} alt="" className='w-10 h-10 rounded-full' /></td>
                                 <td>{user.name}</td>
@@ -58,8 +60,7 @@ const AllSeller = () => {
                                 <td>{user?.verify !== 'true' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Verify</button>}</td>
                                 <td><button className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
-                        }
-
+                        } 
                     </tbody>
                 </table>
             </div>

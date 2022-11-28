@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
  
 const AddProduct = () => {
+    const {user} = useContext(AuthContext);
 
     // useTitle('Add Service')
 
@@ -8,6 +10,7 @@ const AddProduct = () => {
         event.preventDefault();
         const form = event.target;
 
+        const email = form.email.value;
         const seller = form.seller.value;
         const phone = form.phone.value;
         const location = form.location.value;
@@ -23,6 +26,7 @@ const AddProduct = () => {
 
  
         const addItem = {
+            email,
             seller,
             phone,
             location,
@@ -60,6 +64,7 @@ const AddProduct = () => {
             <div className='font-bold text-xl lg:text-4xl flex justify-center mb-10'><span className='text-lime-500'>PLACE ADD</span><span className='text-red-500 ml-2'>PRODUCTS</span></div>
             <form onSubmit={handlePressOrder}>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                    <input name="email" type="email" placeholder={user?.email} disabled defaultValue={user?.email} className="input input-bordered input-secondary w-full" />
                     <input name="seller" type="text" placeholder="Your Name" className="input input-bordered input-secondary w-full" />
                     <input name="phone" type="text" placeholder="Your Phone Number" className="input input-bordered input-secondary w-full" />
                     <input name="location" type="text" placeholder="Your Location" className="input input-bordered input-secondary w-full" />
